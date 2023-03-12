@@ -1,0 +1,31 @@
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const router = require("./src/Routes");
+const mongoose = require("mongoose");
+
+const app = express();
+corsOptions = {
+  origin: ["http://localhost:3000"],
+  credentials: true,
+  methods: ["GET", "POST"],
+};
+
+app.use(cors(corsOptions));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
+app.use(bodyParser.json());
+
+mongoose.connect("mongodb://127.0.0.1:27017/healthApp");
+
+const db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
+
+app.use("/api/v1", router);
+
+app.listen(4000, () => {
+  console.log("sever stared at port 4000");
+});
