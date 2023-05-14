@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const router = require("./src/Routes");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser")
 
 const app = express();
 corsOptions = {
@@ -14,6 +15,7 @@ corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 app.use(bodyParser.json());
+// app.use(cookieParser);
 
 mongoose.connect("mongodb://127.0.0.1:27017/healthApp");
 

@@ -9,4 +9,4 @@ const registerSchema = new mongoose.Schema({
     password: String
 })
 
-exports.registerModel = new mongoose.model("user", registerSchema);
+module.exports = new mongoose.model("user", registerSchema);
